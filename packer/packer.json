@@ -1,0 +1,26 @@
+{
+  "builders": [{
+    "type": "amazon-ebs",
+    "region": "eu-west-2",
+    "source_ami_filter": {
+      "filters": {
+        "virtualization-type": "hvm",
+        "name": "ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*",
+        "root-device-type": "ebs"
+      },
+      "owners": ["099720109477"],
+      "most_recent": true
+    },
+    "instance_type": "t3.micro",
+    "ssh_username": "ubuntu",
+    "ami_name": "golden-nginx-{{timestamp}}"
+  }],
+  "provisioners": [{
+    "type": "shell",
+    "inline": [
+      "sudo apt-get update -y",
+      "sudo apt-get install -y docker.io",
+      "sudo docker run -d -p 80:80 nginx"
+    ]
+  }]
+}
