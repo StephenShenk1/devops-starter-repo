@@ -282,4 +282,3 @@ Also deregister test AMIs and delete snapshots if you’re done testing.
 
 ---
 
-Happy shipping! 🚀
